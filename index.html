@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Disparo - Domine o WhatsApp</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      /* ================== ANIMAÇÃO SUAVE ================== */
+      .fade-move {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.9s ease, transform 0.9s ease;
+      }
+      .fade-only {
+        opacity: 0;
+        transition: opacity 0.9s ease;
+      }
+      .fade-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Contorno do vídeo mais intenso */
+      .video-container {
+        box-shadow: 0 0 20px #00ff41, 0 0 40px #00ff41, 0 0 60px #00ff41;
+      }
+    </style>
+</head>
+
+<body>
+    
+<!-- Meta Pixel Code com LocalStorage -->
+<script>
+(function() {
+  const PIXEL_ID = '2318049111930045';
+  const PAGEVIEW_KEY = 'fb_pageview_timestamp';
+  const CHECKOUT_KEY = 'fb_checkout_timestamp';
+  const DAYS_LIMIT = 30;
+  const MS_LIMIT = DAYS_LIMIT * 24 * 60 * 60 * 1000;
+
+  function shouldTrack(key) {
+    const lastTime = localStorage.getItem(key);
+    if (!lastTime) return true;
+    return (Date.now() - parseInt(lastTime)) > MS_LIMIT;
+  }
+
+  // Carrega o Pixel
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', PIXEL_ID);
+
+  // PageView 1x a cada 30 dias
+  if (shouldTrack(PAGEVIEW_KEY)) {
+    fbq('track', 'PageView');
+    localStorage.setItem(PAGEVIEW_KEY, Date.now());
+  }
+
+  // Aguarda DOM carregado e adiciona InitiateCheckout no botão Cakto
+  document.addEventListener('DOMContentLoaded', () => {
+    const checkoutBtn = document.querySelector('a[href*="pay.cakto.com.br"]');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', () => {
+        if (shouldTrack(CHECKOUT_KEY)) {
+          fbq('track', 'InitiateCheckout');
+          localStorage.setItem(CHECKOUT_KEY, Date.now());
+        }
+      });
+    }
+  });
+})();
+</script>
+
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2318049111930045&ev=PageView&noscript=1" />
+</noscript>
+
+
+<header class="logo-container">
+  <img src="20250808_1819_image.png" alt="Logo Z" class="logo-img" />
+</header>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<!-- Canvas do efeito Matrix -->
+<canvas id="matrixCanvas"></canvas>
+
+<!-- Conteúdo da Landing Page -->
+<div class="content">
+    <h1 class="fade-move" style="transition-delay: 0.1s;">
+        🚀 Chega de perder clientes!<br>
+        <strong>Venda 10x</strong> mais enviando mensagens no WhatsApp em segundos com o <br>
+      <strong></strong><span style="font-size: 2.2rem; color: #00eaff;">Z-Disparo</span></strong>
+    </h1>
+    <p class="fade-move" style="transition-delay: 0.2s;">
+        Economize tempo, aumente conversões e alcance centenas de clientes em minutos.
+    </p>
+
+    <!-- Container do vídeo -->
+    <div class="video-container fade-move" style="transition-delay: 0.3s;">
+        <iframe 
+            id="promoVideo"
+            src="https://player.vimeo.com/video/1108540093?background=0&autoplay=1&muted=1&loop=0&byline=0&title=0"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+        </iframe>
+        <div class="play-overlay" id="playOverlay">▶</div>
+        <div class="pause-alert" id="pauseAlert">⚠ Esse vídeo não ficará no ar por muito tempo!</div>
+        <div class="progress-bar"><div class="progress" id="videoProgress"></div></div>
+    </div>
+
+    <a href="https://pay.cakto.com.br/ybpbnsy_516991" 
+   class="cta-button fade-move" 
+   style="transition-delay: 0.4s;" 
+   target="_blank">
+    Quero o meu Z-Disparo agora!
+</a>
+
+</div>
+
+
+
+<section class="why-section">
+
+
+  <div class="why-card fade-only" style="transition-delay: 0.5s;">
+    ⚡ Venda mais rápido do que seus concorrentes
+Envie 500 mensagens no WhatsApp em minutos com o poder do Z-Disparo
+  </div>
+  <div class="why-card fade-only" style="transition-delay: 0.6s;">
+    ❌ Chega de ficar no “visto” sem resposta
+Z-Disparo dispara suas ofertas em massa e garante que sua mensagem seja lida
+  </div>
+  <div class="why-card fade-only" style="transition-delay: 0.7s;">
+    📈 Transforme seu WhatsApp em uma máquina de vendas
+Z-Disparo alcança centenas de clientes em minutos — no piloto automático
+  </div>
+</section>
+
+<section class="publico-alvo">
+    <h2 class="publico-fade">📢 Para quem é o Z-Disparo?</h2>
+    <p class="publico-fade">
+        O Z-Disparo foi criado para qualquer pessoa ou negócio que precisa se comunicar com leads pelo WhatsApp de forma rápida, organizada e em escala.
+    </p>
+    <p class="publico-fade">
+        Se você quer vender mais, economizar tempo e automatizar seu atendimento, essa ferramenta é para você!
+    </p>
+    
+    <div class="publico-grid">
+        <div class="publico-card publico-fade">
+            <img src="images/iniciantes.png" alt="Iniciantes">
+            <p>🆕 <strong>Iniciantes</strong> que estão começando no marketing digital e querem resultados rápidos.</p>
+        </div>
+        <div class="publico-card publico-fade">
+            <img src="images/afiliados.png" alt="Afiliados">
+            <p>🤝 <strong>Afiliados</strong> que precisam alcançar muitos contatos para divulgar ofertas.</p>
+        </div>
+        <div class="publico-card publico-fade">
+            <img src="images/gestores.png" alt="Gestores de Tráfego">
+            <p>📊 <strong>Gestores de Tráfego</strong> que trabalham com campanhas e geração de leads.</p>
+        </div>
+        <div class="publico-card publico-fade">
+            <img src="images/agencias.png" alt="Agências">
+            <p>🏢 <strong>Donos de Agências</strong> que buscam otimizar a comunicação para seus clientes.</p>
+        </div>
+        <div class="publico-card publico-fade">
+            <img src="images/profissionais.png" alt="Profissionais">
+            <p>📱 <strong>Qualquer profissional</strong> que opera com leads pelo WhatsApp e quer aumentar conversões.</p>
+        </div>
+        <div class="publico-card publico-fade">
+            <img src="images/whatsapp.png" alt="WhatsApp Estratégico">
+            <p>⚡ Se o WhatsApp faz parte da sua estratégia de vendas, o Z-Disparo vai acelerar seus resultados!</p>
+        </div>
+    </div>
+</section>
+
+    </div>
+</section>
+
+
+<section class="jornada-section fade-move" style="transition-delay: 0.2s;">
+  <div class="jornada-texto">
+    <h2 style="text-align:center;">
+      🚀 Minha Jornada Até Criar o<br>
+      <span style="font-size: 2.2rem; color: #00eaff;">Z-Disparo</span>
+    </h2>
+
+    <h3><p>Por muito tempo, eu estive exatamente onde você está agora.</p>
+
+    <img src="images/jornada1.png" alt="Minha Jornada - Início" class="jornada-float direita">
+
+    <p>
+      Comecei no mercado digital com toda a empolgação do mundo. Fui iniciante testando estratégias, 
+      afiliado correndo atrás de conversões, gestor de tráfego medindo cada clique, dono de agência 
+      tentando entregar resultados… e, como muitos, já gastei fortunas com tráfego pago.
+    </p>
+    <p>
+      O que eu recebia em troca?<br>
+      Leads caros e muitas vezes desqualificados.
+    </p>
+    <p>
+      Era frustrante! Eu investia pesado para alcançar pessoas, mas quando finalmente conseguia, o retorno 
+      não pagava nem metade do esforço.
+    </p>
+    <p>
+      E o pior: cada ferramenta que prometia resolver meu problema cobrava assinaturas absurdamente caras, 
+      cheias de funções que eu nem usava — sendo que a única que realmente importava era alcançar meus leads 
+      de forma direta e eficaz no WhatsApp.
+    </p>
+    <p>
+      Foi nesse momento que a indignação virou ação. Eu decidi criar minha própria solução. Uma ferramenta 
+      simples, direta e extremamente poderosa que resolvesse meu problema de vez: enviar mensagens em massa 
+      para meus leads no WhatsApp com rapidez, sem pagar caro por isso.
+    </p>
+
+    <img src="images/jornada2.png" alt="Minha Jornada - Resultado" class="jornada-float esquerda">
+
+    <p>
+      Assim nasceu o <strong>Z-Disparo</strong>. Primeiro, para atender às minhas próprias operações e cortar custos. 
+      Mas logo percebi que muita gente estava passando pela mesma dor: gastar rios de dinheiro para falar com 
+      poucas pessoas, e ainda correr atrás de leads que não convertem.
+    </p>
+    <p>
+      Hoje, meu objetivo é claro:<br>
+      💡 Colocar o poder de alcançar centenas de leads na palma da sua mão — de forma acessível, rápida e eficaz.
+    </p>
+    <p>
+      Se você também está cansado de gastar mais do que ganha, o Z-Disparo é a ferramenta que vai mudar o jogo para você.
+    </p></h3>
+  </div>
+</section>
+
+<section class="garantia-section fade-move" style="transition-delay: 0.2s;">
+  <div class="garantia-container">
+    
+    <!-- Imagem central -->
+    <div class="garantia-img">
+      <img src="images/garantia7dias.png" alt="Garantia de 7 Dias">
+    </div>
+
+    <!-- Texto -->
+    <h2>✅ Garantia Total e Suporte Direto</h2>
+    <p>
+      Você tem <strong>7 dias</strong> para testar o <span style="color:#00eaff;">Z-Disparo</span> sem risco nenhum.
+      Se não ficar satisfeito, devolvemos 100% do seu investimento.
+    </p>
+    <p>
+      E mais: o suporte será <strong>diretamente comigo</strong>, para que você receba ajuda rápida, sem enrolação
+      e com respostas personalizadas para o seu negócio.
+    </p>
+  </div>
+</section>
+
+<section class="bonus-section">
+    <h2 class="bonus-fade">🎁 Conteúdos Bônus + Networking Exclusivo</h2>
+    <p class="bonus-fade">
+        Ao entrar para o <strong>Z-Disparo</strong>, você não leva apenas a ferramenta.
+        Você terá acesso a treinamentos exclusivos, materiais bônus e um grupo de networking com empreendedores e profissionais que já estão usando o Z-Disparo para vender todos os dias.
+    </p>
+
+    <div class="bonus-grid">
+        <div class="bonus-card bonus-fade">
+            <img src="images/bonus1.png" alt="Conteúdos Bônus">
+            <p>📚 <strong>Conteúdos Bônus</strong> — Aprenda estratégias e técnicas para extrair o máximo do Z-Disparo e multiplicar suas vendas.</p>
+        </div>
+        <div class="bonus-card bonus-fade">
+            <img src="images/networking.png" alt="Networking Exclusivo">
+            <p>🤝 <strong>Networking Exclusivo</strong> — Conecte-se com empreendedores, troque experiências e faça parcerias valiosas.</p>
+        </div>
+        <div class="bonus-card bonus-fade">
+            <img src="images/suporte.png" alt="Suporte Direto">
+            <p>💬 <strong>Suporte Direto</strong> — Tire dúvidas e receba ajuda diretamente comigo e minha equipe.</p>
+        </div>
+    </div>
+</section>
+
+
+<script src="js/matrix.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const fadeElements = document.querySelectorAll(".fade-move, .fade-only");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("fade-visible");
+      } else {
+        entry.target.classList.remove("fade-visible");
+      }
+    });
+  }, { threshold: 0.15 });
+
+  fadeElements.forEach(el => observer.observe(el));
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // use os nomes exatamente como estão na pasta sounds (case-sensitive)
+  const pageSound = new Audio("sounds/page-open.wav");   // se não existir, substitua por um que exista
+  const cardSound = new Audio("sounds/card-appear.wav"); // verifique lower-case
+
+  // pré-carrega
+  pageSound.preload = "auto";
+  cardSound.preload = "auto";
+
+  // volumes (ajuste se quiser)
+  pageSound.volume = 0.5;
+  cardSound.volume = 0.45;
+
+  // debug: log de erros de carregamento
+  pageSound.addEventListener("error", (e) => console.error("pageSound load error:", e));
+  cardSound.addEventListener("error", (e) => console.error("cardSound load error:", e));
+
+  let soundsEnabled = false;
+
+  // Função que ativa sons após a primeira interação do usuário
+  function enableSoundsOnce() {
+    if (soundsEnabled) return;
+    soundsEnabled = true;
+
+    // removemos os listeners pois já fomos ativados
+    document.removeEventListener("click", enableSoundsOnce);
+    document.removeEventListener("touchstart", enableSoundsOnce);
+    document.removeEventListener("scroll", enableSoundsOnce);
+
+    // tenta tocar o som inicial (pode ser bloqueado em alguns casos, por isso o .catch)
+    pageSound.currentTime = 0;
+    pageSound.play().catch(err => console.warn("pageSound blocked:", err));
+  }
+
+  // ativadores: click / touchstart (mobile) / scroll (fallback)
+  document.addEventListener("click", enableSoundsOnce, { once: true });
+  document.addEventListener("touchstart", enableSoundsOnce, { once: true });
+  document.addEventListener("scroll", enableSoundsOnce, { once: true });
+  document.addEventListener("wheel", enableSoundsOnce, { once: true });
+  document.addEventListener("keydown", enableSoundsOnce, { once: true });
+
+
+  // Observer para tocar som quando os cards aparecem
+  const cards = document.querySelectorAll(".why-card");
+  if (cards.length) {
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && soundsEnabled) {
+          // corta qualquer reprodução anterior e toca do início
+          cardSound.currentTime = 0;
+          cardSound.play().catch(err => console.warn("cardSound blocked:", err));
+        }
+      });
+    }, { threshold: 0.6 }); // 60% visível
+
+    cards.forEach(c => cardObserver.observe(c));
+  } else {
+    console.warn("Nenhum .why-card encontrado para observar som.");
+  }
+});
+</script>
+
+<!-- Banner de Consentimento -->
+<div id="consent-overlay" style="
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+">
+    <div style="
+        background: rgba(0, 0, 0, 0.85);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 400px;
+        color: #00ff41;
+        font-family: Arial, sans-serif;
+        box-shadow: 0 0 20px #00ff41;
+    ">
+        <h2 style="margin-bottom: 15px;">⚠ Termos de Consentimento</h2>
+        <p style="margin-bottom: 20px; line-height: 1.4;">
+            Para continuar navegando e ter a melhor experiência, clique em "Aceitar".
+        </p>
+        <button id="accept-consent" style="
+            background: #00ff41;
+            border: none;
+            color: black;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        ">Aceitar</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  window.soundsEnabled = false;
+
+  const sounds = {
+    page: new Audio("sounds/page-open.mp3"),
+    card: new Audio("sounds/card-appear.wav"),
+    hover: new Audio("sounds/card-hover.wav"),
+    cta: new Audio("sounds/cta-hover.wav"),
+    bonus: new Audio("sounds/card-hover.wav")
+  };
+
+  Object.keys(sounds).forEach(k => {
+    const s = sounds[k];
+    s.preload = "auto";
+    s.volume = (k === "cta") ? 0.6 : 0.5;
+  });
+
+  function tryUnlockAudio() {
+    if (window.soundsEnabled) return;
+    const t = sounds.page;
+    t.muted = true;
+    t.currentTime = 0;
+    const p = t.play();
+    if (p && typeof p.then === "function") {
+      p.then(() => {
+        t.pause();
+        t.muted = false;
+        window.soundsEnabled = true;
+      }).catch(() => {});
+    } else {
+      try { t.pause(); window.soundsEnabled = true; } catch(e) {}
+    }
+  }
+
+  function enableSoundsNow() {
+    window.soundsEnabled = true;
+  }
+
+  ["click","touchstart","wheel","keydown","scroll"].forEach(evt => {
+    document.addEventListener(evt, tryUnlockAudio, { once: true, passive: true });
+  });
+
+  const acceptBtn = document.getElementById("accept-consent");
+  if (acceptBtn) {
+    acceptBtn.addEventListener("click", () => {
+      enableSoundsNow();
+      const t = sounds.page;
+      t.currentTime = 0;
+      t.play().catch(() => {});
+      const overlay = document.getElementById("consent-overlay");
+      if (overlay) overlay.style.display = "none";
+    });
+  }
+
+  const whyCards = document.querySelectorAll(".why-card");
+  if (whyCards.length) {
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.soundsEnabled) {
+          const s = sounds.card;
+          s.currentTime = 0;
+          s.play().catch(()=>{});
+        }
+      });
+    }, { threshold: 0.6 });
+    whyCards.forEach(c => cardObserver.observe(c));
+  }
+
+  function attachSound(selector, soundObj) {
+    document.querySelectorAll(selector).forEach(el => {
+      el.addEventListener("mouseenter", () => {
+        if (!window.soundsEnabled) return;
+        soundObj.currentTime = 0;
+        soundObj.play().catch(()=>{});
+      });
+      el.addEventListener("touchstart", () => {
+        if (!window.soundsEnabled) return;
+        soundObj.currentTime = 0;
+        soundObj.play().catch(()=>{});
+      }, { passive: true });
+    });
+  }
+
+  attachSound(".publico-card, .publico-alvo h2, .publico-alvo p", sounds.hover);
+  attachSound(".foto-card, .bonus-card, .bonus-section h2, .bonus-section p", sounds.bonus);
+  attachSound(".why-card, .publico-fade", sounds.hover);
+  attachSound(".cta-button", sounds.cta);
+
+  // 🔹 RESTAURANDO ANIMAÇÕES DA SEÇÃO "PARA QUEM É"
+  const publicoElements = document.querySelectorAll(".publico-fade");
+  const publicoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  }, { threshold: 0.15 });
+  publicoElements.forEach(el => publicoObserver.observe(el));
+
+  // 🔹 RESTAURANDO ANIMAÇÕES DA SEÇÃO DE BÔNUS
+  const bonusElements = document.querySelectorAll(".bonus-fade");
+  const bonusObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      } else {
+        entry.target.classList.remove("visible");
+      }
+    });
+  }, { threshold: 0.15 });
+  bonusElements.forEach(el => bonusObserver.observe(el));
+
+});
+</script>
+
+<!-- Rodapé Persuasivo -->
+<footer class="footer-section fade-move" style="transition-delay: 0.2s;">
+  <div class="footer-container">
+    
+    <!-- Frase final -->
+    <h2 class="footer-title">⚡ O seu concorrente não vai esperar... e seus clientes também não.</h2>
+    <strong><p class="footer-subtitle">O momento de agir é agora!</p></strong>
+
+    <!-- Benefícios -->
+    <ul class="footer-benefits">
+      <li>✅ Alcance centenas de leads no WhatsApp em minutos</li>
+      <li>✅ Economize tempo e aumente conversões</li>
+      <li>✅ Teste sem risco com 7 dias de garantia</li>
+    </ul>
+
+    <!-- Botão final -->
+    <a href="https://pay.cakto.com.br/ybpbnsy_516991" 
+   class="cta-button fade-move" 
+   style="transition-delay: 0.4s;" 
+   target="_blank">
+    Quero o meu Z-Disparo agora!
+</a>
+
+    <!-- Confiança -->
+    <div class="footer-info">
+      <p>📞 Suporte direto: <a href="mailto:contato@z-disparo.com.br">zdisparador@gmail.com</a></p>
+      <p>🔒 Pagamento 100% seguro</p>
+      <p>
+        <a href="https://docs.google.com/document/d/e/2PACX-1vRlc-ESvhVGsXmtcZ8aFIkB5T-aluR4wTVQb_dFdT9mXcEggoDGkfFP_4zJx4WVQusg3YJvXJW6bf-G/pub">Política de Privacidade</a> | 
+        <a href="https://docs.google.com/document/d/e/2PACX-1vTWktS3qjZoqcZ2CLv7JXyEfYSwf5HsOWcQDGMjdrflmaTlKmskIhaExOaJzBqwv1zMdVp49RqytfcC/pub">Termos de Uso</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer-section {
+  background: rgba(0,0,0,0.85);
+  padding: 40px 20px;
+  text-align: center;
+  color: #fff;
+  border-top: 2px solid #00eaff;
+  box-shadow: 0 0 20px #00eaff;
+}
+
+.footer-title {
+  font-size: 1.8rem;
+  color: #00eaff;
+  text-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  margin-bottom: 10px;
+}
+
+.footer-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.footer-benefits {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.footer-benefits li {
+  margin: 5px 0;
+}
+
+.footer-cta {
+  display: inline-block;
+  background: #00eaff;
+  color: #000;
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px #00eaff, 0 0 30px #00eaff;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.footer-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff;
+}
+
+.footer-info {
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.footer-info a {
+  color: #00eaff;
+  text-decoration: none;
+}
+
+.footer-info a:hover {
+  text-decoration: underline;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const ctaFooterSound = new Audio("sounds/cta-hover.wav"); // som do botão
+    ctaFooterSound.preload = "auto";
+    ctaFooterSound.volume = 0.6;
+
+    const footerButton = document.querySelector(".footer-cta");
+    if (footerButton) {
+        footerButton.addEventListener("mouseenter", () => {
+            if (window.soundsEnabled) {
+                ctaFooterSound.currentTime = 0;
+                ctaFooterSound.play().catch(err => console.warn("Som do CTA footer bloqueado:", err));
+            }
+        });
+        footerButton.addEventListener("touchstart", () => {
+            if (window.soundsEnabled) {
+                ctaFooterSound.currentTime = 0;
+                ctaFooterSound.play().catch(err => console.warn("Som do CTA footer bloqueado:", err));
+            }
+        }, { passive: true });
+    }
+});
+</script>
+
+<footer class="site-footer">
+    <p>© 2025 Z-Disparo — Todos os direitos reservados.</p>
+    <p><a href="https://docs.google.com/document/d/e/2PACX-1vRlc-ESvhVGsXmtcZ8aFIkB5T-aluR4wTVQb_dFdT9mXcEggoDGkfFP_4zJx4WVQusg3YJvXJW6bf-G/pub">Política de Privacidade</a> | <a href="https://docs.google.com/document/d/e/2PACX-1vTWktS3qjZoqcZ2CLv7JXyEfYSwf5HsOWcQDGMjdrflmaTlKmskIhaExOaJzBqwv1zMdVp49RqytfcC/pub">Termos de Uso</a></p>
+</footer>
+
+<style>
+.site-footer {
+    background: #000; /* fundo preto */
+    color: #00ff41;   /* verde neon */
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 10px rgba(0, 255, 65, 0.5);
+}
+.site-footer a {
+    color: #00eaff;
+    text-decoration: none;
+}
+.site-footer a:hover {
+    text-decoration: underline;
+}
+</style>
+
+
+</body>
+</html>
