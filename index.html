@@ -670,5 +670,48 @@ document.addEventListener("DOMContentLoaded", () => {
 </style>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const delaySegundos = 20; // segundos para mostrar botão após play
+    const botoes = document.querySelectorAll('.cta-button');
+    botoes.forEach(btn => btn.style.display = 'none');
+
+    const iframe = document.querySelector('#promoVideo');
+    if (!iframe) return;
+    const player = new Vimeo.Player(iframe);
+
+    player.on('play', () => {
+        console.log("Vídeo começou a rodar, iniciando contagem...");
+        setTimeout(() => {
+            botoes.forEach(btn => {
+                btn.style.display = 'inline-block';
+                btn.classList.add('fade-visible');
+            });
+        }, delaySegundos * 1000);
+    });
+});
+</script>
+
+<!-- Script do alerta de pausa/play -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const pauseAlert = document.getElementById("pauseAlert");
+    const iframe = document.querySelector('#promoVideo');
+    if (!iframe || !pauseAlert) return;
+
+    const player = new Vimeo.Player(iframe);
+
+    player.on('pause', () => {
+        pauseAlert.style.display = 'block';
+    });
+
+    player.on('play', () => {
+        pauseAlert.style.display = 'none';
+    });
+});
+</script>
+
+
+
 </body>
 </html>
