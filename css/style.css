@@ -936,24 +936,15 @@ button:hover {
     border: 2px solid #00ff41; /* verde neon */
     padding: 4px 10px;
     border-radius: 5px;
+    background-color: rgba(0, 255, 65, 0.1);
+}
 
 
-    /* Ajustes para mobile */
-@media (max-width: 768px) {
-    /* Faixa de aviso */
-    .aviso-topo {
-        font-size: 14px !important;
-        padding: 4px 8px !important;
-        line-height: 1.2 !important;
-    }
 
     /* Reduzir espaço abaixo da faixa */
     .hero, .container {
         margin-top: 0 !important;
         padding-top: 5px !important;
     }
-}
-    background-color: rgba(0, 255, 65, 0.1);
-}
 
 
