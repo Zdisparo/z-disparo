@@ -86,24 +86,37 @@
 
 <body>
     <!-- Faixa de aviso -->
-    <div id="faixa-aviso" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #ff0000;
-        color: #00f0ff;
-        font-size: 20px;
-        font-weight: bold;
-        text-align: center;
-        padding: 12px 0;
-        z-index: 9999;
-        text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #00f0ff;
-        box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
-        font-family: Arial, sans-serif;
-    ">
-    ⚠ Se você sair da página não terá outra chance ⚠ — <span id="contador" style="color: #39ff14;"></span>
+    <style>
+#faixa-aviso {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff0000;
+    color: #00f0ff;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 12px 0;
+    z-index: 9999;
+    text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+    box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+    font-family: Arial, sans-serif;
+}
+
+@media (max-width: 768px) {
+    #faixa-aviso {
+        font-size: 14px;
+        padding: 6px 0;
+    }
+}
+</style>
+
+<div id="faixa-aviso">
+    ⚠ Se você sair da página não terá outra chance ⚠ — 
+    <span id="contador" style="color: #39ff14;"></span>
 </div>
+
 
 <script>
 // 20 minutos em segundos
@@ -147,14 +160,34 @@ atualizarContador();
 
 <!-- Conteúdo da Landing Page -->
 <div class="content">
-    <h1 class="fade-move" style="transition-delay: 0.1s;">
-        🚀 Chega de perder clientes!<br>
-        <strong>Venda 10x</strong> mais enviando mensagens no WhatsApp em segundos com o <br>
+    <div style="text-align: center; margin-bottom: 15px;">
+    <span style="
+        display: inline-block;
+        padding: 10px 20px;
+        border: 2px solid red;
+        border-radius: 6px;
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: rgba(0,0,0,0.7);
+        text-shadow: 0 0 5px red, 0 0 10px red, 0 0 20px red;
+        box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+        font-size: 22px;
+    ">
+        💥 ESQUEÇA TRÁFEGO PAGO
+    </span>
+</div>
+
+<p style="color: #39ff14; font-size: 20px; font-weight: bold; text-align: center; margin: 0;">
+    Venda no WhatsApp sem gastar 1 centavo em anúncios.
+</p>
+
+</h1>
+
+        Venda no WhatsApp <strong> sem gastar 1 centavo em anúncios.</strong><br>
       <strong></strong><span style="font-size: 2.2rem; color: #00eaff;">Z-Disparo</span></strong>
     </h1>
-    <p class="fade-move" style="transition-delay: 0.2s;">
-        Economize tempo, aumente conversões e alcance centenas de clientes em minutos.
-    </p>
+    
 
     <!-- Container do vídeo -->
     <div class="video-container fade-move" style="transition-delay: 0.3s;">
@@ -174,15 +207,19 @@ atualizarContador();
     <div class="progress-bar"><div class="progress" id="videoProgress"></div></div>
 </div>
 
+
+
     <a href="https://pay.cakto.com.br/ybpbnsy_516991" 
    class="cta-button fade-move" 
-   style="transition-delay: 0.4s;" 
-   target="_blank">
+   style="transition-delay: 0.4s; display: none;" 
+   target="_blank"
+   id="cta-button">
     Quero o meu Z-Disparo agora!
 </a>
 
 <!-- Gatilho de desconto -->
 <div id="gatilho-desconto" class="fade-move" style="
+    display: none;
     transition-delay: 0.45s; 
     text-align: center; 
     opacity: 0; 
@@ -203,14 +240,19 @@ atualizarContador();
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const gatilho = document.getElementById("gatilho-desconto");
+    const ctaButton = document.getElementById("cta-button");
 
     // Exibe só após 98 segundos
     setTimeout(() => {
+        gatilho.style.display = "block";
+        ctaButton.style.display = "inline-block";
+
         gatilho.style.opacity = "1";
         gatilho.style.transform = "scale(1)";
     }, 98000); // 98 segundos
 });
 </script>
+
 
 
 
