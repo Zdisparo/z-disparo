@@ -84,6 +84,58 @@
 </noscript>
 
 
+<body>
+    <!-- Faixa de aviso -->
+    <div id="faixa-aviso" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ff0000;
+        color: #00f0ff;
+        font-size: 20px;
+        font-weight: bold;
+        text-align: center;
+        padding: 12px 0;
+        z-index: 9999;
+        text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+        box-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000;
+        font-family: Arial, sans-serif;
+    ">
+    ⚠ Se você sair da página não terá outra chance ⚠ — <span id="contador" style="color: #39ff14;"></span>
+</div>
+
+<script>
+// 20 minutos em segundos
+let tempoRestante = 20 * 60;
+
+function atualizarContador() {
+    let minutos = Math.floor(tempoRestante / 60);
+    let segundos = tempoRestante % 60;
+
+    minutos = minutos < 10 ? "0" + minutos : minutos;
+    segundos = segundos < 10 ? "0" + segundos : segundos;
+
+    document.getElementById("contador").textContent = `Faltam ${minutos}:${segundos} para acabar a promoção`;
+
+    if (tempoRestante > 0) {
+        tempoRestante--;
+    } else {
+        document.getElementById("contador").textContent = "Promoção Encerrada!";
+    }
+}
+
+setInterval(atualizarContador, 1000);
+atualizarContador();
+</script>
+
+
+    <!-- Espaço extra para não cobrir o conteúdo -->
+    <div style="height: 50px;"></div>
+
+    <!-- O resto do seu conteúdo vem aqui -->
+
+
 <header class="logo-container">
   <img src="20250808_1819_image.png" alt="Logo Z" class="logo-img" />
 </header>
@@ -121,7 +173,10 @@
     <div class="pause-alert" id="pauseAlert">⚠ Esse vídeo não ficará no ar por muito tempo!</div>
     <div class="progress-bar"><div class="progress" id="videoProgress"></div></div>
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 376ea3a (atualização nova)
 
     <a href="https://pay.cakto.com.br/ybpbnsy_516991" 
    class="cta-button fade-move" 
@@ -130,7 +185,39 @@
     Quero o meu Z-Disparo agora!
 </a>
 
+<!-- Gatilho de desconto -->
+<div id="gatilho-desconto" class="fade-move" style="
+    transition-delay: 0.45s; 
+    text-align: center; 
+    opacity: 0; 
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+">
+    <span class="preco-antigo" style="display:block; font-size: 18px; color: white; text-decoration: line-through; border: 2px solid red; padding: 3px 6px; border-radius: 5px; margin-bottom: 5px;">
+        De R$ 680,00
+    </span>
+    <span class="preco-novo" style="display:block; font-size: 28px; font-weight: bold; color: white; border: 2px solid green; background-color: green; padding: 3px 6px; border-radius: 5px; margin-bottom: 8px;">
+        por R$ 47,90
+    </span>
+    <span class="frase-gatilho" style="display:block; font-size: 20px; font-weight: bold; color: yellow;">
+        Só hoje!
+    </span>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const gatilho = document.getElementById("gatilho-desconto");
+
+    // Exibe só após 98 segundos
+    setTimeout(() => {
+        gatilho.style.opacity = "1";
+        gatilho.style.transform = "scale(1)";
+    }, 98000); // 98 segundos
+});
+</script>
+
+
+
 
 
 
@@ -713,6 +800,111 @@ document.addEventListener("DOMContentLoaded", () => {
     player.on('play', () => {
         pauseAlert.style.display = 'none';
     });
+});
+</script>
+
+
+<!-- Seu conteúdo do site -->
+
+<!-- Popup de compras -->
+<div id="popup-compra">
+    💬 Paulo acabou de adquirir a ferramenta!
+</div>
+
+<audio id="popup-audio" src="sounds/popup.mp3" preload="auto"></audio>
+
+<style>
+/* Estilo geral do popup */
+#popup-compra {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #00ff7f;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 2px solid #00f0ff;
+    box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff, 0 0 40px #00f0ff;
+    font-size: 16px;
+    font-weight: bold;
+    display: none;
+    max-width: 90%;
+    z-index: 9999;
+    animation: fadeIn 0.6s ease forwards;
+}
+
+/* Animação de entrada */
+@keyframes fadeIn {
+    0% {opacity: 0; transform: translateY(30px);}
+    100% {opacity: 1; transform: translateY(0);}
+}
+
+/* Animação de saída desintegrando */
+@keyframes pixelFade {
+    0% {opacity: 1; filter: blur(0px);}
+    20% {opacity: 0.8; filter: blur(1px);}
+    40% {opacity: 0.6; filter: blur(2px);}
+    60% {opacity: 0.4; filter: blur(3px);}
+    80% {opacity: 0.2; filter: blur(4px);}
+    100% {opacity: 0; filter: blur(6px);}
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    #popup-compra {
+        font-size: 14px;
+        padding: 10px 14px;
+        left: 10px;
+        bottom: 10px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const pessoas = [
+        "Paulo de São Paulo","Mariana de Belo Horizonte","João de Curitiba","Carla de Recife",
+        "Lucas de Porto Alegre","Fernanda de Manaus","Pedro de Salvador","Juliana de Fortaleza",
+        "André de Goiânia","Camila de Brasília","Ricardo de Florianópolis","Ana de Natal",
+        "Rodrigo de Vitória","Patrícia de João Pessoa","Gustavo de Teresina","Tatiane de Belém",
+        "Eduardo de Santos","Larissa de Campinas","Felipe de Sorocaba","Bianca de Aracaju",
+        "Marcelo de Campo Grande","Renata de Maceió","Thiago de Uberlândia","Aline de Maringá",
+        "Carlos de Londrina","Priscila de Niterói","Leandro de São Luís","Gabriela de Macapá",
+        "Vinícius de Palmas","Isabela de Blumenau","Alexandre de Caxias do Sul","Débora de Petrópolis",
+        "Hugo de Bauru","Sabrina de Montes Claros","Otávio de Joinville","Daniela de Ribeirão Preto",
+        "Fábio de Piracicaba","Letícia de Anápolis","Wagner de Caruaru","Elaine de Boa Vista"
+    ];
+
+    const popup = document.getElementById("popup-compra");
+    const audio = document.getElementById("popup-audio");
+    let index = 0;
+
+    function mostrarPopup() {
+        const pessoa = pessoas[index % pessoas.length];
+        popup.textContent = `💬 ${pessoa} acabou de adquirir a ferramenta!`;
+        popup.style.display = "block";
+        popup.style.animation = "fadeIn 0.6s ease forwards";
+
+        // Toca o som
+        audio.currentTime = 0; // garante que sempre toca do início
+        audio.play().catch(() => {}); // ignora erro se bloqueado pelo navegador
+
+        // Após 5s, anima a saída e depois some
+        setTimeout(() => {
+            popup.style.animation = "pixelFade 1s ease forwards";
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 1000);
+        }, 5000);
+
+        index++;
+    }
+
+    // Mostra primeiro após 10s, depois a cada 10s
+    setTimeout(() => {
+        mostrarPopup();
+        setInterval(mostrarPopup, 10000);
+    }, 10000);
 });
 </script>
 
