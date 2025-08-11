@@ -280,10 +280,7 @@ document.addEventListener("DOMContentLoaded", function() {
   <!-- TODO: coloque aqui TODO o conteúdo da primeira sessão
        que você quer deixar embaçado -->
   
-  </div>
-
-
-
+  
 
 <section class="why-section">
 
@@ -462,66 +459,89 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // use os nomes exatamente como estão na pasta sounds (case-sensitive)
-  const pageSound = new Audio("sounds/page-open.wav");   // se não existir, substitua por um que exista
-  const cardSound = new Audio("sounds/card-appear.wav"); // verifique lower-case
+  const pageSound = new Audio("sounds/page-open.wav");
+  const cardSound = new Audio("sounds/card-appear.wav");
+  const alertSound = new Audio("sounds/alerta.mp3"); // seu som de alerta
 
   // pré-carrega
   pageSound.preload = "auto";
   cardSound.preload = "auto";
+  alertSound.preload = "auto";
 
-  // volumes (ajuste se quiser)
+  // volumes
   pageSound.volume = 0.5;
   cardSound.volume = 0.45;
+  alertSound.volume = 1.0; // volume total pro alerta
 
-  // debug: log de erros de carregamento
+  // debug: erros
   pageSound.addEventListener("error", (e) => console.error("pageSound load error:", e));
   cardSound.addEventListener("error", (e) => console.error("cardSound load error:", e));
+  alertSound.addEventListener("error", (e) => console.error("alertSound load error:", e));
 
   let soundsEnabled = false;
 
-  // Função que ativa sons após a primeira interação do usuário
   function enableSoundsOnce() {
     if (soundsEnabled) return;
     soundsEnabled = true;
 
-    // removemos os listeners pois já fomos ativados
     document.removeEventListener("click", enableSoundsOnce);
     document.removeEventListener("touchstart", enableSoundsOnce);
     document.removeEventListener("scroll", enableSoundsOnce);
 
-    // tenta tocar o som inicial (pode ser bloqueado em alguns casos, por isso o .catch)
     pageSound.currentTime = 0;
     pageSound.play().catch(err => console.warn("pageSound blocked:", err));
   }
 
-  // ativadores: click / touchstart (mobile) / scroll (fallback)
+  // ativadores
   document.addEventListener("click", enableSoundsOnce, { once: true });
   document.addEventListener("touchstart", enableSoundsOnce, { once: true });
   document.addEventListener("scroll", enableSoundsOnce, { once: true });
   document.addEventListener("wheel", enableSoundsOnce, { once: true });
   document.addEventListener("keydown", enableSoundsOnce, { once: true });
 
-
-  // Observer para tocar som quando os cards aparecem
+  // Observer para cards
   const cards = document.querySelectorAll(".why-card");
   if (cards.length) {
     const cardObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && soundsEnabled) {
-          // corta qualquer reprodução anterior e toca do início
           cardSound.currentTime = 0;
           cardSound.play().catch(err => console.warn("cardSound blocked:", err));
         }
       });
-    }, { threshold: 0.6 }); // 60% visível
+    }, { threshold: 0.6 });
 
     cards.forEach(c => cardObserver.observe(c));
   } else {
     console.warn("Nenhum .why-card encontrado para observar som.");
   }
+
+  // Evento para o botão de play
+  const playOverlay = document.getElementById("playOverlay");
+  if (playOverlay) {
+    playOverlay.addEventListener("click", function() {
+      if (soundsEnabled) {
+        alertSound.currentTime = 0;
+        alertSound.play().catch(err => console.warn("alertSound blocked:", err));
+      }
+
+      // tremor
+      document.body.classList.add("shake");
+      setTimeout(() => {
+        document.body.classList.remove("shake");
+      }, 500);
+
+      // play do vídeo (Vimeo API)
+      if (typeof player !== "undefined") {
+        player.play();
+      }
+    });
+  } else {
+    console.warn("#playOverlay não encontrado.");
+  }
 });
 </script>
+
 
 <!-- Banner de Consentimento -->
 <div id="consent-overlay" style="
@@ -828,7 +848,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    const delaySegundos = 120; // segundos para mostrar botão após play
+    const delaySegundos = 98; // segundos para mostrar botão após play
     const botoes = document.querySelectorAll('.cta-button');
     botoes.forEach(btn => btn.style.display = 'none');
 
@@ -979,7 +999,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensagem = document.getElementById("mensagem-bloqueio");
 
   // Tempo que o conteúdo vai ficar bloqueado (em segundos)
-  const tempoBloqueio = 120; // 2 minutos e 30 segundos
+  const tempoBloqueio = 98; // 2 minutos e 30 segundos
 
   // Função para travar o scroll no vídeo
   function travarScroll() {
