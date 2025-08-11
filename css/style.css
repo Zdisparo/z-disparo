@@ -913,3 +913,30 @@ button:hover {
     100% { box-shadow: 0 0 25px #00eaff, 0 0 50px #00ff41; }
 }
 
+.preco-desconto {
+    margin-top: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.preco-antigo {
+    color: white;
+    border: 2px solid red;
+    padding: 4px 10px;
+    margin-right: 8px;
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    text-decoration-color: red;
+    border-radius: 5px;
+}
+
+.preco-novo {
+    color: white;
+    border: 2px solid #00ff41; /* verde neon */
+    padding: 4px 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 255, 65, 0.1);
+}
+
+
