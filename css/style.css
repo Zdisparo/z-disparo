@@ -948,3 +948,15 @@ button:hover {
     }
 
 
+#conteudo-bloqueado {
+    position: relative;
+    filter: blur(8px);
+    pointer-events: none;
+}
+
+#conteudo-bloqueado.desbloqueado {
+    filter: none;
+    pointer-events: auto;
+}
+
+
