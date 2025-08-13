@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  
+
+<link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689cd5083bd8338f1806985d/v4/embed.html">
+<script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+<link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689cd5083bd8338f1806985d/v4/player.js" as="script">
+<link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+<link rel="preload" href="https://cdn.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/689cd4988b131b7cf6215110/main.m3u8" as="fetch">
+<link rel="dns-prefetch" href="https://cdn.converteai.net">
+<link rel="dns-prefetch" href="https://scripts.converteai.net">
+<link rel="dns-prefetch" href="https://images.converteai.net">
+<link rel="dns-prefetch" href="https://api.vturb.com.br">
 
 
-  <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-THQ4D569');</script>
-<!-- End Google Tag Manager -->
-    
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
@@ -20,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <!-- Meta tags para compartilhamento -->
     <meta property="og:title" content="Z-Disparo">
     <meta property="og:description" content="Nunca mais gaste 1 centavo com anúncios.">
-    <meta property="og:image" content="https://z-disparo-1.onrender.com/images/miniatura.jpg">
+    <meta property="og:image" content="https://z-disparo-1.onrender.com/images/miniatura.png">
     <meta property="og:url" content="https://z-disparo-1.onrender.com">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -136,12 +138,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 <body>
-
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQ4D569"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-  
     <!-- Faixa de aviso -->
     <style>
 #faixa-aviso {
@@ -210,7 +206,12 @@ atualizarContador();
   <img src="20250808_1819_image.png" alt="Logo Z" class="logo-img" />
 </header>
 
-<script src="https://player.vimeo.com/api/player.js"></script>
+<script type="text/javascript">
+  var s = document.createElement("script");
+  s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
+  s.async = true;
+  document.head.appendChild(s);
+</script>
 
 <!-- Canvas do efeito Matrix -->
 <canvas id="matrixCanvas"></canvas>
@@ -245,23 +246,33 @@ atualizarContador();
     
 
     <!-- Container do vídeo -->
-    <div class="video-container fade-move" style="transition-delay: 0.3s;">
-  <div style="padding:56.25% 0 0 0;position:relative;">
-    <iframe
-      id="promoVideo"
-      src="https://player.vimeo.com/video/1109136420?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1&amp;loop=1"
-      frameborder="0"
-      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-      referrerpolicy="strict-origin-when-cross-origin"
-      style="position:absolute;top:0;left:0;width:100%;height:100%;"
-      title="VSL Z-Disparo com legendas">
+    <script type="text/javascript">
+  var s = document.createElement("script");
+  s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js";
+  s.async = true;
+  document.head.appendChild(s);
+</script>
+
+<div id="ifr_689cd5083bd8338f1806985d_wrapper" style="margin: 0 auto; width: 100%;">
+  <div id="ifr_689cd5083bd8338f1806985d_aspect" style="position: relative; padding: 56.25% 0 0 0;">
+    <iframe 
+      id="ifr_689cd5083bd8338f1806985d"
+      frameborder="0" 
+      allowfullscreen 
+      src="about:blank"
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+      referrerpolicy="origin"
+      onload="
+        this.onload = null; 
+        this.src = 'https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689cd5083bd8338f1806985d/v4/embed.html'
+        + (location.search || '?')
+        + '&vl=' + encodeURIComponent(location.href);
+      ">
     </iframe>
   </div>
-
-  <div class="play-overlay" id="playOverlay">▶</div>
-  <div class="pause-alert" id="pauseAlert" style="display:none;">⚠ Esse vídeo não ficará no ar por muito tempo!</div>
-  <div class="progress-bar"><div class="progress" id="videoProgress"></div></div>
 </div>
+
+  
 
 
 
