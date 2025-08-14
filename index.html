@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 
+
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KGE4P0Y253"></script>
 <script>
@@ -11,6 +12,7 @@
 
   gtag('config', 'G-KGE4P0Y253');
 </script>
+  
 
 <link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689cd5083bd8338f1806985d/v4/embed.html">
 <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
@@ -97,48 +99,49 @@
 (function() {
   const PIXEL_ID = '2318049111930045';
   const PAGEVIEW_KEY = 'fb_pageview_timestamp';
-  const CHECKOUT_KEY = 'fb_checkout_timestamp';
+  const LEAD_KEY = 'fb_lead_timestamp'; // chave específica para Lead
   const DAYS_LIMIT = 30;
   const MS_LIMIT = DAYS_LIMIT * 24 * 60 * 60 * 1000;
 
   function shouldTrack(key) {
     const lastTime = localStorage.getItem(key);
     if (!lastTime) return true;
-    return (Date.now() - parseInt(lastTime)) > MS_LIMIT;
+    return (Date.now() - parseInt(lastTime, 10)) > MS_LIMIT;
   }
 
   // Carrega o Pixel
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;
+    n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
+    if(!f._fbq)f._fbq=n;
+    n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];
+    t=b.createElement(e); t.async=!0; t.src=v;
+    s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+  }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
   
   fbq('init', PIXEL_ID);
 
   // PageView 1x a cada 30 dias
   if (shouldTrack(PAGEVIEW_KEY)) {
     fbq('track', 'PageView');
-    localStorage.setItem(PAGEVIEW_KEY, Date.now());
+    localStorage.setItem(PAGEVIEW_KEY, Date.now().toString());
   }
 
-  // Aguarda DOM carregado e adiciona InitiateCheckout no botão Cakto
+  // Aguarda DOM carregado e adiciona evento Lead no botão Cakto
   document.addEventListener('DOMContentLoaded', () => {
-    const checkoutBtn = document.querySelector('a[href*="pay.cakto.com.br"]');
+    const checkoutBtn = document.querySelector('a[href*="presell.html"]');
     if (checkoutBtn) {
       checkoutBtn.addEventListener('click', () => {
-        if (shouldTrack(CHECKOUT_KEY)) {
-          fbq('track', 'InitiateCheckout');
-          localStorage.setItem(CHECKOUT_KEY, Date.now());
+        if (shouldTrack(LEAD_KEY)) {
+          fbq('track', 'Lead'); // dispara evento Lead
+          localStorage.setItem(LEAD_KEY, Date.now().toString());
         }
       });
     }
   });
 })();
 </script>
+
 
 <noscript>
   <img height="1" width="1" style="display:none"
@@ -285,7 +288,7 @@ atualizarContador();
 
 
 
-    <a href="https://pay.cakto.com.br/ybpbnsy_516991" 
+    <a href="presell.html" 
    class="cta-button fade-move" 
    style="transition-delay: 0.4s; display: none;" 
    target="_blank"
