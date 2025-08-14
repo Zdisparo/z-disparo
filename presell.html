@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<script>
+(function () {
+  const PIXEL_ID = '2318049111930045';
+
+  // chaves específicas desta página (presell)
+  const PAGEVIEW_KEY     = 'fb_pageview_ts_presell';
+  const VIEWCONTENT_KEY  = 'fb_viewcontent_ts_presell';
+  const CHECKOUT_KEY     = 'fb_initiatecheckout_ts_presell';
+  const DAYS_LIMIT = 30;
+  const MS_LIMIT   = DAYS_LIMIT * 24 * 60 * 60 * 1000;
+
+  function shouldTrack(key) {
+    const last = parseInt(localStorage.getItem(key) || '0', 10);
+    return (Date.now() - last) > MS_LIMIT;
+  }
+
+  // Base do Pixel + desativa PageView automático ANTES de carregar a lib
+  (function(f,b,e,v,n,t,s){
+    if (f.fbq) return;
+    n=f.fbq=function(){ n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments) };
+    if(!f._fbq) f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0'; n.queue=[];
+    n('set','autoConfig', false, PIXEL_ID); // impede PageView automático
+    t=b.createElement(e); t.async=!0; t.src=v;
+    s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s);
+  })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+  // Inicializa o Pixel (sem PageView automático)
+  fbq('init', PIXEL_ID);
+
+  // PageView manual (1x a cada 30 dias)
+  if (shouldTrack(PAGEVIEW_KEY)) {
+    fbq('track', 'PageView');
+    localStorage.setItem(PAGEVIEW_KEY, String(Date.now()));
+  }
+
+  // ViewContent manual (1x a cada 30 dias)
+  if (shouldTrack(VIEWCONTENT_KEY)) {
+    fbq('track', 'ViewContent');
+    localStorage.setItem(VIEWCONTENT_KEY, String(Date.now()));
+  }
+
+  // InitiateCheckout no clique do botão #cta (1x a cada 30 dias)
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.querySelector('#cta');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        if (shouldTrack(CHECKOUT_KEY)) {
+          fbq('track', 'InitiateCheckout');
+          localStorage.setItem(CHECKOUT_KEY, String(Date.now()));
+        }
+      });
+    }
+  });
+})();
+</script>
+
+
+
+
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quase lá — Z‑Disparo</title>
+
+  <!-- ======= Meta/Compartilhamento ======= -->
+  <meta property="og:title" content="Quase lá — Z‑Disparo" />
+  <meta property="og:description" content="Antes de finalizar, veja como o Z‑Disparo vai acelerar suas vendas no WhatsApp em minutos." />
+  <meta property="og:image" content="images/miniatura.png" />
+  <meta property="og:type" content="website" />
+
+  <!-- ======= ConverteÁi / VTurb (substitua pelos IDs do novo vídeo) ======= -->
+  <!-- Pré-carregamento para acelerar o player -->
+  <link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689cd5083bd8338f1806985d/v4/embed.html">
+  <link rel="preload" href="https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689cd5083bd8338f1806985d/v4/player.js" as="script">
+  <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+  <link rel="dns-prefetch" href="https://cdn.converteai.net">
+  <link rel="dns-prefetch" href="https://scripts.converteai.net">
+  <script defer src="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js"></script>
+
+  <!-- ======= Estilos ======= -->
+  <style>
+    :root{
+      --neon: #00ff41;          /* verde matrix */
+      --cyan: #00eaff;          /* ciano glow */
+      --fg:   #0a0a0a;          /* texto escuro p/ fundo claro do gradiente */
+      --text:#e8f2ec;           /* texto claro */
+      --bg0: #000;              /* preto */
+      --bg1: #111;              /* cinza escuro */
+      --bg2: #f5f5f5;           /* quase branco */
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+      color:var(--text);
+      background: linear-gradient(145deg, var(--bg0) 0%, #0b0b0b 35%, #1a1a1a 55%, #dcdcdc 90%, var(--bg2) 100%);
+      background-attachment: fixed;
+    }
+    /* barra superior */
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,255,65,.2)}
+    .topbar-inner{max-width:1000px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px}
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,255,65,.35);padding:6px 12px;border-radius:999px;color:#c4ffd5;font-weight:600;box-shadow:0 0 12px rgba(0,255,65,.25) inset}
+    .timer{margin-left:auto;font-variant-numeric:tabular-nums}
+
+    /* container principal */
+    .wrap{max-width:1000px;margin:28px auto;padding:0 16px}
+    .hero{display:grid;gap:18px;margin-bottom:22px}
+    .title{font-size:clamp(26px,4vw,38px);line-height:1.1;margin:0;text-shadow:0 0 14px rgba(0,234,255,.25)}
+    .subtitle{margin:0;color:#bfe8ff}
+
+    /* card de vídeo */
+    .video-card{background:rgba(0,0,0,.72);border:1px solid rgba(0,234,255,.25);border-radius:18px;box-shadow:0 0 18px rgba(0,234,255,.18), 0 0 32px rgba(0,255,65,.12);overflow:hidden}
+    .video-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid rgba(0,234,255,.15)}
+    .video-head .dot{width:10px;height:10px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon)}
+    .video-body{position:relative}
+    .aspect{position:relative;padding-top:56.25%}
+    .aspect iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+    /* seção de reforços */
+    .grid{display:grid;gap:14px;margin:22px 0}
+    .grid3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.grid3{grid-template-columns:1fr}}
+    .card{background:rgba(0,0,0,.68);border:1px solid rgba(0,255,65,.25);border-radius:16px;padding:16px;box-shadow:0 0 20px rgba(0,255,65,.12)}
+    .card h3{margin:0 0 8px 0;font-size:18px;color:#caffd2}
+    .card p{margin:0;color:#d9ffea}
+
+    /* CTA principal */
+    .cta{display:block;text-align:center;margin:22px auto 10px auto;width:min(680px,100%)}
+    .cta a{display:block;text-decoration:none;background:linear-gradient(90deg, var(--neon), var(--cyan));color:#001b0a;font-weight:900;padding:16px;border-radius:14px;box-shadow:0 0 18px rgba(0,255,65,.4), 0 0 26px rgba(0,234,255,.3);transform:translateY(0);transition:transform .15s ease, filter .2s ease}
+    .cta a:hover{transform:translateY(-2px);filter:saturate(1.1)}
+    .cta small{display:block;margin-top:8px;color:#b9ffd0}
+
+    /* selo / garantia / avisos */
+    .trust{display:grid;gap:14px;grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.trust{grid-template-columns:1fr}}
+    .trust .mini{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.6);border:1px dashed rgba(0,234,255,.35);padding:12px 14px;border-radius:12px}
+    .mini .icon{width:26px;height:26px;border-radius:50%;box-shadow:0 0 12px rgba(0,255,65,.45) inset;border:1px solid rgba(0,255,65,.5)}
+
+    /* depoimentos compactos */
+    .quotes{display:grid;gap:14px;margin-top:20px}
+    .quote{background:rgba(0,0,0,.6);border:1px solid rgba(0,255,65,.2);border-radius:12px;padding:12px;color:#eafff3;font-size:14px}
+    .quote strong{color:#caffd2}
+
+    /* rodapé leve */
+    footer{opacity:.9;text-align:center;color:#bfe8ff;margin:28px 0 18px}
+
+    /* barra fixa de CTA (mobile) */
+    .sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(0,0,0,.82);border-top:1px solid rgba(0,255,65,.25);backdrop-filter:blur(6px);padding:10px}
+    .sticky-cta a{display:block;text-align:center;text-decoration:none;background:linear-gradient(90deg,var(--neon),var(--cyan));color:#001b0a;font-weight:900;padding:12px;border-radius:12px}
+
+    /* micro animação glow */
+    @keyframes pulseGlow{0%{box-shadow:0 0 18px rgba(0,255,65,.30)}50%{box-shadow:0 0 28px rgba(0,234,255,.45)}100%{box-shadow:0 0 18px rgba(0,255,65,.30)}}
+    .pulse{animation:pulseGlow 2.4s ease-in-out infinite}
+  </style>
+</head>
+<body>
+  <!-- ======= Topbar com promessa curta e timer ======= -->
+  <div class="topbar">
+    <div class="topbar-inner">
+      <span class="pill">⚡ Oferta de Hoje</span>
+      <span class="pill">Acesso imediato</span>
+      <span class="pill timer" id="timer">15:00</span>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- ======= Hero ======= -->
+    <section class="hero">
+      <h1 class="title">Quase lá — antes, um recado rápido pra você ⚠️</h1>
+      <p class="subtitle">Veja em <strong>menos de 1 minuto</strong> como o <em>Z‑Disparo</em> vai colocar suas vendas no WhatsApp no piloto automático — e por que centenas de pessoas confiam em nós.</p>
+    </section>
+
+    <!-- ======= Card de Vídeo ======= -->
+    <section class="video-card pulse">
+      <div class="video-head">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span class="dot"></span>
+          <strong>Como funciona — passo a passo</strong>
+        </div>
+        <span style="opacity:.8">1:00</span>
+      </div>
+      <div class="video-body">
+        <!-- Troque o ID do player abaixo pelo do seu vídeo de PRESELL no VTurb -->
+        <div id="ifr_689d5e0f4c4ae214c83a0ca6_wrapper" style="margin: 0 auto; width: 100%;">
+  <div style="position: relative; padding: 56.25% 0 0 0;" id="ifr_689d5e0f4c4ae214c83a0ca6_aspect">
+    <iframe frameborder="0" allowfullscreen src="about:blank" id="ifr_689d5e0f4c4ae214c83a0ca6" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" referrerpolicy="origin" onload="this.onload=null; this.src='https://scripts.converteai.net/80a6a49a-7ebf-469d-993e-79d7f30f1366/players/689d5e0f4c4ae214c83a0ca6/v4/embed.html'+(location.search||'?')+'&vl='+encodeURIComponent(location.href)"></iframe>
+  </div>
+</div>
+    </section>
+
+    <!-- ======= Reforços Rápidos ======= -->
+    <section class="grid grid3">
+      <div class="card">
+        <h3>✔️ Prova de uso real</h3>
+        <p>+120 pessoas usam diariamente. Resultados enviados no grupo de alunos — transparente e ao vivo.</p>
+      </div>
+      <div class="card">
+        <h3>🔒 Compra segura</h3>
+        <p>Pagamento processado pela Cakto. Dados criptografados, antifraude e garantia de 7 dias.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Ativação imediata</h3>
+        <p>Você paga, recebe o acesso e já pode enviar suas primeiras mensagens em <strong>5 minutos</strong>.</p>
+      </div>
+    </section>
+
+    <!-- ======= CTA ======= -->
+    <div class="cta">
+  <a id="cta" 
+     href="https://pay.cakto.com.br/ybpbnsy_516991" 
+     target="_blank" 
+     rel="noopener noreferrer">
+     Quero meu Z-Disparo agora
+  </a>
+  <small>De R$ 680 por <strong>R$ 47,90 hoje</strong>. Garantia total de 7 dias.</small>
+</div>
+
+
+    <!-- ======= Trust / Garantia ======= -->
+    <section class="trust">
+      <div class="mini"><span class="icon"></span> <div><strong>Garantia 7 dias</strong><br/>Teste sem risco: não curtiu, devolvemos 100%.</div></div>
+      <div class="mini"><span class="icon"></span> <div><strong>Suporte direto</strong><br/>Atendimento rápido pelo WhatsApp após a compra.</div></div>
+      <div class="mini"><span class="icon"></span> <div><strong>Atualizações</strong><br/>Novas funções inclusas, sem custo extra.</div></div>
+    </section>
+
+    <!-- ======= Depoimentos curtos ======= -->
+    <section class="quotes">
+      <div class="quote">“Paguei e em <strong>5 min</strong> já estava disparando. Fiz minhas primeiras vendas no mesmo dia.” — <strong>Carla S.</strong></div>
+      <div class="quote">“Abandonei os anúncios. Hoje meu tráfego é o WhatsApp e o Z‑Disparo.” — <strong>Rogério M.</strong></div>
+    </section>
+
+    
+    </div>
+
+    <footer>
+      © 2025 Z‑Disparo — Compra 100% segura | Política de Privacidade • Termos
+    </footer>
+  </main>
+
+  
+
+  <!-- ======= Scripts ======= -->
+  <script>
+    // Timer simples 15:00
+    (function(){
+      let s = 15*60; const el = document.getElementById('timer');
+      setInterval(()=>{const m=String(Math.floor(s/60)).padStart(2,'0');const ss=String(s%60).padStart(2,'0');el.textContent=`${m}:${ss}`; if(s>0)s--;},1000);
+    })();
+
+    // Mostrar sticky CTA após 20s ou 40% de rolagem
+    (function(){
+      const sticky = document.getElementById('sticky');
+      sticky.style.display = 'none';
+      let shown = false; function show(){ if(!shown){ sticky.style.display='block'; shown=true; }}
+      setTimeout(show, 20000);
+      window.addEventListener('scroll', ()=>{ if((window.scrollY/(document.body.scrollHeight - innerHeight))>0.4) show(); });
+    })();
+
+    // (Opcional) Aguardar o play do VTurb para revelar CTA
+    // Caso deseje revelar o botão principal após X segundos do vídeo,
+    // você pode usar um setTimeout simples aqui.
+  </script>
+</body>
+</html>
