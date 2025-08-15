@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entre no Grupo de Networking</title>
+
+  <!-- Pixel da Meta -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'SEU_ID_DO_PIXEL_AQUI'); // Substitua pelo seu ID
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=SEU_ID_DO_PIXEL_AQUI&ev=PageView&noscript=1"
+  /></noscript>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Share Tech Mono', monospace;
+      color: #00ff99;
+      overflow: hidden;
+      background: black;
+    }
+
+    /* Fundo Matrix */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .container {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #00ffcc;
+      text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+      margin-bottom: 30px;
+    }
+
+    /* Botão neon preenchido pulsante */
+    .btn {
+      padding: 15px 40px;
+      font-size: 18px;
+      color: #000;
+      background-color: #00ff33;
+      border: 2px solid #00ff33;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #00ff33, 0 0 20px #00ff33, 0 0 30px #00ff33;
+      text-decoration: none;
+      transition: 0.3s;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    .btn:hover {
+      background-color: #00ff99;
+      box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99, 0 0 60px #00ff99;
+      color: #000;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px #00ff33, 0 0 20px #00ff33, 0 0 30px #00ff33; }
+      50% { box-shadow: 0 0 20px #00ff33, 0 0 40px #00ff33, 0 0 60px #00ff33; }
+      100% { box-shadow: 0 0 10px #00ff33, 0 0 20px #00ff33, 0 0 30px #00ff33; }
+    }
+
+    /* Luzes neon azuis de fundo */
+    .lights {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.2), transparent 40%),
+                  radial-gradient(circle at 80% 30%, rgba(0, 255, 255, 0.15), transparent 50%),
+                  radial-gradient(circle at 50% 70%, rgba(0, 200, 255, 0.1), transparent 60%);
+      z-index: 0;
+      animation: glow 5s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrix"></canvas>
+  <div class="lights"></div>
+
+  <div class="container">
+    <h1>Entre no nosso Grupo de Networking</h1>
+    <a class="btn" href="https://chat.whatsapp.com/BjsQGQIWGpT4CQdEH2SG9E?mode=ac_t" target="_blank">
+      Entrar no grupo
+    </a>
+  </div>
+
+  <script>
+    // Efeito Matrix
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+    const fontSize = 18;
+    const columns = canvas.width / fontSize;
+    const drops = [];
+
+    for(let x = 0; x < columns; x++)
+      drops[x] = Math.random() * canvas.height;
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00ff99";
+      ctx.font = fontSize + "px Share Tech Mono";
+
+      for(let i = 0; i < drops.length; i++){
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+          drops[i] = 0;
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
